@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Limpieza y Optimización de PC</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="logo">PC-Clean</div>
+      <ul class="nav-links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <section id="hero">
+      <h1>Tu computadora, rápida y silenciosa como el primer día.</h1>
+      <p>
+        Especialistas en limpieza física y optimización de software para PC de
+        escritorio y notebooks.
+      </p>
+      <a href="#contacto" class="btn">Pedir Presupuesto</a>
+    </section>
+
+    <section id="servicios">
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <div class="grid-servicios">
+        <div class="card">
+          <h3>Mantenimiento Físico</h3>
+          <p>
+            Limpieza profunda de polvo, cambio de pasta térmica de alta calidad
+            y gestión de cables para mejorar el flujo de aire y reducir
+            temperaturas.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Optimización de Software</h3>
+          <p>
+            Eliminación de malware, desinstalación de programas innecesarios,
+            actualización de drivers y reinstalación limpia del sistema
+            operativo.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Instalación de Partes</h3>
+          <p>
+            Consultas de Hardware, Armado de computadoras o instalación de
+            partes a computadora ya armada.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="beneficios">
+      <h2 class="section-title">¿Por qué optimizar tu equipo?</h2>
+      <ul class="lista-beneficios">
+        <li>
+          <strong>Mayor vida útil:</strong> Evita que los componentes se quemen
+          por exceso de calor.
+        </li>
+        <li>
+          <strong>Máximo rendimiento:</strong> Recupera los FPS en tus juegos y
+          la fluidez al trabajar.
+        </li>
+        <li>
+          <strong>Cero ruidos molestos:</strong> Un equipo limpio hace que los
+          ventiladores trabajen de forma silenciosa.
+        </li>
+      </ul>
+    </section>
+
+    <section id="contacto">
+      <h2 class="section-title">Contáctenos</h2>
+      <form class="form-contacto" id="formulario">
+        <input type="text" id="nombre" placeholder="Tu Nombre" required />
+        <input
+          type="text"
+          id="equipo"
+          placeholder="¿Qué equipo tienes? (Ej: Notebook Dell, PC Armada)"
+          required
+        />
+        <textarea
+          id="problema"
+          placeholder="Cuéntanos brevemente qué le sucede a tu equipo..."
+          required
+        ></textarea>
+        <button type="submit" class="btn" style="border: none; cursor: pointer">
+          Enviar Consulta
+        </button>
+      </form>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 PC-Clean. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
