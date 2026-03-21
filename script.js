@@ -36,3 +36,57 @@ formulario.addEventListener("submit", function (event) {
   // Limpiamos el formulario después de enviar
   formulario.reset();
 });
+
+// 3. Desvanecer el header al hacer scroll
+const nav = document.querySelector("nav"); // Seleccionamos la barra de navegación
+
+window.addEventListener("scroll", () => {
+  // Este efecto solo se aplica en pantallas de escritorio (mayores a 768px),
+  // donde la barra de navegación es fija.
+  if (window.innerWidth > 768) {
+    const scrollY = window.scrollY;
+    const fadeEnd = window.innerHeight * 0.5; // El desvanecimiento terminará al 50% de la altura de la pantalla
+
+    if (scrollY < fadeEnd) {
+      // Calculamos la opacidad: será 1 al inicio (scroll 0) y 0 al llegar a fadeEnd
+      const opacity = 1 - scrollY / fadeEnd;
+      nav.style.opacity = opacity;
+      nav.style.visibility = "visible";
+      nav.style.pointerEvents = "auto"; // Permitir clics
+    } else {
+      nav.style.opacity = 0;
+      nav.style.visibility = "hidden";
+      nav.style.pointerEvents = "none"; // Evitar que el nav invisible bloquee clics
+    }
+  } else {
+    // En móvil, la barra no es fija, así que nos aseguramos de que siempre sea visible.
+    nav.style.opacity = 1;
+    nav.style.visibility = "visible";
+    nav.style.pointerEvents = "auto";
+  }
+});
+
+// 4. Animación de entrada para las cards al hacer scroll
+const cards = document.querySelectorAll(".card");
+
+const observerOptions = {
+  root: null, // Observa en relación al viewport
+  rootMargin: "0px",
+  threshold: 0.1, // La animación se activa cuando el 10% del elemento es visible
+};
+
+const cardObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach((entry) => {
+    // Si el elemento está visible en la pantalla
+    if (entry.isIntersecting) {
+      entry.target.classList.add("is-visible");
+      // Una vez que la animación se ejecuta, dejamos de observar el elemento para no repetirla
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+// Le decimos al observador que vigile cada una de las cards
+cards.forEach((card) => {
+  cardObserver.observe(card);
+});

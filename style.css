@@ -1,9 +1,9 @@
 /* --- PALETA DE COLORES Y VARIABLES --- */
 :root {
   --fondo: #f7f7f7;
-  --acento: #757575;
+  --acento: #555555; /* Aumentamos contraste para accesibilidad */
   --contraste: #1a1a1a;
-  --fuente-principal:
+  --fuente-sistema:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol";
@@ -17,10 +17,12 @@
 }
 
 body {
-  font-family: var(--fuente-principal);
+  font-family:
+    "Inter", var(--fuente-sistema); /* Usamos la fuente 'Inter' importada */
   background-color: var(--fondo);
   color: var(--acento);
   line-height: 1.6;
+  padding-top: 78px; /* Espacio para la barra de navegación fija */
 }
 
 h1,
@@ -78,8 +80,7 @@ nav {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 0 20px;
-  margin-top: 60px;
+  padding: 0 5%; /* Usamos padding consistente con otras secciones */
 }
 
 #hero h1 {
@@ -139,11 +140,23 @@ section {
   text-align: center;
   width: 100%;
   max-width: 400px;
+  /* Estado inicial para la animación de entrada */
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
 }
 
 .card h3 {
   margin-bottom: 15px;
   font-size: 1.5rem;
+}
+
+/* Clase que se añade con JS para activar la animación */
+.card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* --- BENEFICIOS --- */
@@ -187,13 +200,21 @@ textarea {
   padding: 15px;
   border: 1px solid var(--acento);
   border-radius: 5px;
-  font-family: var(--fuente-principal);
+  font-family: inherit; /* Hereda la fuente del body */
   background-color: var(--fondo);
+  transition: all 0.2s ease-in-out;
 }
 
 textarea {
   resize: vertical;
   min-height: 150px;
+}
+
+/* Mejoramos la accesibilidad del formulario */
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--contraste);
+  border-color: transparent;
 }
 
 /* --- FOOTER --- */
@@ -202,4 +223,36 @@ footer {
   padding: 30px;
   background-color: var(--contraste);
   color: var(--fondo);
+}
+
+/* --- DISEÑO RESPONSIVO (MÓVIL) --- */
+@media (max-width: 768px) {
+  body {
+    padding-top: 0; /* Quitamos el padding para el nav estático */
+  }
+
+  nav {
+    position: static; /* La barra de navegación ya no es fija en móvil */
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 5%;
+  }
+
+  #hero {
+    min-height: 60vh;
+    padding: 40px 5%;
+  }
+
+  #hero h1 {
+    font-size: 2.2rem; /* Reducimos el tamaño para móviles */
+  }
+
+  #hero p {
+    font-size: 1.1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
 }
