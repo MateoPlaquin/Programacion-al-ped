@@ -90,3 +90,36 @@ const cardObserver = new IntersectionObserver((entries, observer) => {
 cards.forEach((card) => {
   cardObserver.observe(card);
 });
+
+// 5. Menú hamburguesa para móvil
+const hamburger = document.querySelector(".hamburger");
+const navLinks = document.querySelector(".nav-links");
+const overlay = document.querySelector(".overlay");
+
+const toggleNav = () => {
+  // Activa la animación de entrada/salida del menú
+  navLinks.classList.toggle("nav-active");
+  // Anima el botón hamburguesa para que se convierta en una 'X'
+  hamburger.classList.toggle("toggle");
+  // Muestra u oculta el overlay
+  overlay.classList.toggle("overlay-active");
+};
+
+// Abrir/cerrar el menú al hacer clic en el botón
+hamburger.addEventListener("click", toggleNav);
+
+// Cerrar el menú al hacer clic en el overlay
+overlay.addEventListener("click", () => {
+  if (navLinks.classList.contains("nav-active")) {
+    toggleNav();
+  }
+});
+
+// Cerrar el menú al hacer clic en uno de los enlaces (para que el usuario vea la sección a la que navegó)
+document.querySelectorAll(".nav-links a").forEach((link) => {
+  link.addEventListener("click", () => {
+    if (navLinks.classList.contains("nav-active")) {
+      toggleNav();
+    }
+  });
+});

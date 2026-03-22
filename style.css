@@ -47,8 +47,21 @@ nav {
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 1000;
+  z-index: 1002; /* Elevado para que el menú móvil esté sobre el overlay */
   border-bottom: 1px solid #e0e0e0;
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 2px;
+  background-color: var(--contraste);
+  margin: 5px;
+  transition: all 0.3s ease;
 }
 
 .logo {
@@ -225,6 +238,22 @@ textarea:focus {
   border-color: transparent;
 }
 
+/* --- OVERLAY --- */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1001; /* Debajo del menú, encima del contenido */
+  transition:
+    opacity 0.5s ease-in-out,
+    visibility 0.5s ease-in-out;
+}
+
 /* --- FOOTER --- */
 footer {
   text-align: center;
@@ -233,23 +262,20 @@ footer {
   color: var(--fondo);
 }
 
+.overlay.overlay-active {
+  opacity: 1;
+  visibility: visible;
+}
+
 /* --- DISEÑO RESPONSIVO (MÓVIL) --- */
 @media (max-width: 768px) {
-  body {
-    padding-top: 0; /* Quitamos el padding para el nav estático */
-  }
-
-  nav {
-    position: static; /* La barra de navegación ya no es fija en móvil */
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    padding: 15px 5%;
-  }
-
   #hero {
     min-height: 60vh;
     padding: 40px 5%;
+  }
+
+  .hamburger {
+    display: block;
   }
 
   #hero h1 {
@@ -262,5 +288,62 @@ footer {
 
   .section-title {
     font-size: 2rem;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 78px; /* Altura de la barra de navegación */
+    right: 5%; /* Lo alineamos con el padding del contenido */
+    height: auto; /* La altura se ajusta al contenido */
+    width: auto; /* El ancho se ajusta al contenido */
+    background-color: var(--fondo);
+    flex-direction: column;
+    align-items: flex-start; /* Alinea los items a la izquierda */
+    /* Estado inicial: completamente oculto */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition:
+      transform 0.4s ease,
+      opacity 0.4s ease;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    padding: 10px 0; /* Espaciado interno vertical */
+    /* z-index ya no es necesario aquí, lo hereda del nav padre */
+  }
+
+  .nav-links li a {
+    padding: 10px 40px 10px 20px; /* Añade padding a los enlaces, especialmente a la izquierda */
+  }
+
+  .grid-servicios {
+    gap: 20px; /* Reducimos el espacio entre cards */
+  }
+
+  .card {
+    padding: 30px; /* Reducimos el padding interno de las cards */
+  }
+
+  section {
+    padding: 80px 5%; /* Reducimos el padding de las secciones */
+  }
+
+  .nav-links.nav-active {
+    /* Estado activo: visible en su posición final */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Animación del botón hamburguesa a 'X' */
+  .toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 5px);
+  }
+  .toggle .line2 {
+    opacity: 0;
+  }
+  .toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -5px);
   }
 }
