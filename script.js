@@ -41,28 +41,20 @@ formulario.addEventListener("submit", function (event) {
 const nav = document.querySelector("nav"); // Seleccionamos la barra de navegación
 
 window.addEventListener("scroll", () => {
-  // Este efecto solo se aplica en pantallas de escritorio (mayores a 768px),
-  // donde la barra de navegación es fija.
-  if (window.innerWidth > 768) {
-    const scrollY = window.scrollY;
-    const fadeEnd = window.innerHeight * 0.5; // El desvanecimiento terminará al 50% de la altura de la pantalla
+  // Este efecto se aplica en todas las pantallas.
+  const scrollY = window.scrollY;
+  const fadeEnd = window.innerHeight * 0.5; // El desvanecimiento terminará al 50% de la altura de la pantalla
 
-    if (scrollY < fadeEnd) {
-      // Calculamos la opacidad: será 1 al inicio (scroll 0) y 0 al llegar a fadeEnd
-      const opacity = 1 - scrollY / fadeEnd;
-      nav.style.opacity = opacity;
-      nav.style.visibility = "visible";
-      nav.style.pointerEvents = "auto"; // Permitir clics
-    } else {
-      nav.style.opacity = 0;
-      nav.style.visibility = "hidden";
-      nav.style.pointerEvents = "none"; // Evitar que el nav invisible bloquee clics
-    }
-  } else {
-    // En móvil, la barra no es fija, así que nos aseguramos de que siempre sea visible.
-    nav.style.opacity = 1;
+  if (scrollY < fadeEnd) {
+    // Calculamos la opacidad: será 1 al inicio (scroll 0) y 0 al llegar a fadeEnd
+    const opacity = 1 - scrollY / fadeEnd;
+    nav.style.opacity = opacity;
     nav.style.visibility = "visible";
-    nav.style.pointerEvents = "auto";
+    nav.style.pointerEvents = "auto"; // Permitir clics
+  } else {
+    nav.style.opacity = 0;
+    nav.style.visibility = "hidden";
+    nav.style.pointerEvents = "none"; // Evitar que el nav invisible bloquee clics
   }
 });
 
